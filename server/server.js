@@ -13,7 +13,7 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use('/api', require('./routes'));
 
 app.get('/', (req, res) => {
 	res.status(200).send('Hello World!!');
@@ -23,9 +23,6 @@ app.listen(port, () => {
 	console.log(`Course Signup Server listening at http://localhost:${port}`);
 });
 
-const run = async () => {};
-
 db.sync({ force: true }).then(() => {
-  console.log("Drop and re-sync db.");
-  run();
+  console.log('Dropped and re-sync db.');
 }).catch(console.error);
