@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "full stack course selector with node, express, sequelize, posgres, and react",
   "scripts": {
-    "install": "yarn",
+    "installAll": "cd server && yarn && cd ../course-client && yarn && cd ../",
     "seed": "cd server && npm run seed && cd ../",
     "server": "cd server && yarn && yarn start && cd ../",
     "client": "cd course-client && yarn && yarn start && cd ../",

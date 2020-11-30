@@ -13,6 +13,9 @@ const Session = db.define('session', {
   },
   released: {
     type: DataTypes.BOOLEAN
+  },
+  content: {
+    type: DataTypes.TEXT
   }
 });
 

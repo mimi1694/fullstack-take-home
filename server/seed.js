@@ -20,14 +20,8 @@ const seed = (async () => {
   const user1 = await User.create({ email: 'foo@email.com', name: 'Foo', id: 1 });
   const user2 = await User.create({ email: 'bar@email.com', name: 'Bar', id: 2 });
 
-  await user1.addSection("1")
-  await section1.addUser("1");
-  await user1.addSection("5");
-  await section5.addUser("1");
-  await user2.addSection("1")
-  await section1.addUser("2");
-  await user2.addSection("4");
-  await section4.addUser("2");
+  await user1.setSections([section5]);
+  await user2.setSections([section1, section4]);
 
   console.log(`seeded user ${user1.name} successfully`);
   console.log(`seeded user ${user2.name} successfully`);

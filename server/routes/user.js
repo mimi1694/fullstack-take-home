@@ -41,25 +41,24 @@ router.post("/", (req, res, next) => {
   .catch(err => { console.error(err); throw err; });
 });
 
+// for updating user sections
 router.put("/", (req, res, next) => {
-  User.update(
-    {
-      email: req.body.email,
-      name: req.body.name
-    },
-    { where: { id: req.body.userId } },
-  )
-  .then(user => {
-    if (req.body.sections) {
-      User.findOne({where: { id: req.body.userId }})
-        .then(user => {
-          return Section.findAll({ where: { id: req.body.sections }})
-            .then(sections => {
-              return user.setSections(sections);
-            })
-        });
-    } else return Promise.resolve(user);
-  })
-  .then(user => res.json(user))
-  .catch(next)
+  const userId = req.body.userId;
+  const sectionIds = req.body.sectionIds;
+  if (sectionIds) {
+    // find the user and sections that match given Id's
+    let user;
+    User.findOne({
+      where: { id: userId },
+      attributes: ["id", "email", "name"],
+      include: [{model: Section}]
+    })
+    .then(foundUser => {
+      user = foundUser;
+      return Section.findAll({ where: { id: sectionIds }, include: [{model: User}]})
+    })
+    .then(sections => user.setSections(sections))
+    .then(result => res.json(result))
+    .catch(console.error);
+  } else next();
 });
