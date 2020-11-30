@@ -57,8 +57,19 @@ router.put("/", (req, res, next) => {
       user = foundUser;
       return Section.findAll({ where: { id: sectionIds }, include: [{model: User}]})
     })
-    .then(sections => user.setSections(sections))
+    .then(sections => {
+      // check to see if we're trying to add a user to a section
+      // if section already has 10 users, error out
+      if (user.sections.length < sectionIds.length) {
+        const sectionToAdd = sections.find(section => !section.users.find(enrolledUser => enrolledUser.id === user.id))
+        if (sectionToAdd && sectionToAdd.users.length >= 10) {
+          res.status(400).send("This course enrollment has been capped.");
+        }
+      }
+      user.setSections(sections);
+    })
     .then(result => res.json(result))
-    .catch(console.error);
-  } else next();
+  } else {
+    res.status(400).send("No sectionIds found.");
+  }
 });

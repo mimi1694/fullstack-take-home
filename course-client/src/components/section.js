@@ -39,7 +39,9 @@ export class Section extends React.Component {
         this.setState({ sectionUsers: currSection?.users });
         this.props.onEnrollmentChange({id: this.props.section.id, users: this.state.sectionUsers});
       })
-      .catch(console.error);
+      .catch(err => {
+        console.error("UHOH! We couldn't add you to that course.", err);
+      });
   }
 
   render () {
@@ -49,7 +51,7 @@ export class Section extends React.Component {
         {
           this.props.userIsEnrolled
             ? <button onClick={this.unenroll}>Un-enroll</button>
-            : <button disabled={this.props.userSignedUp} onClick={this.enroll}>Enroll</button>
+            : <button disabled={(this.state.sectionUsers.length > 9) || this.props.userSignedUp} onClick={this.enroll}>Enroll</button>
         }
         <p>Starts: {new Date(this.props.section.dateStart).toDateString()}</p>
         <div>

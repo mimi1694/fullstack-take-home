@@ -13,5 +13,4 @@ export const createUser = (name, email) =>
         .catch(console.error);
 
 export const updateUser = (userId, sectionIds) =>
-    axios.put(`api/users`, { userId, sectionIds })
-        .catch(console.error);
+    axios.put(`api/users`, { userId, sectionIds });
