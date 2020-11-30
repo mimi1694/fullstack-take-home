@@ -1,0 +1,15 @@
+{
+  "name": "fullstack-take-home",
+  "version": "1.0.0",
+  "description": "full stack course selector with node, express, sequelize, posgres, and react",
+  "scripts": {
+    "install": "yarn",
+    "seed": "cd server && npm run seed && cd ../",
+    "server": "cd server && yarn && yarn start && cd ../",
+    "client": "cd course-client && yarn && yarn start && cd ../",
+    "build:client": "cd course-client && npm run build && cd ../",
+    "startApp": "npm run seed && npm run server & npm run client"
+  },
+  "author": "",
+  "license": "ISC"
+}
