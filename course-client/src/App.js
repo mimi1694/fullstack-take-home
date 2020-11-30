@@ -1,18 +1,24 @@
-import React from 'react';
 import './App.css';
+import React from 'react';
+import { Entry } from './components/entry';
+import Course from './components/course';
 
-function App() {
-	return (
-		<div className='App'>
-			<h1>Course Sign Up</h1>
-			<h2>Courses</h2>
-			<h2>Sign Up</h2>
+export class App extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = { loggedIn: false };
+	}
 
-			<input type='text' placeholder='Name' />
-			<input type='text' placeholder='Email' />
-			<button onClick={() => alert('Sign up clicked!')}>Sign Up</button>
-		</div>
-	);
+  render() {
+    return (
+			<div className='App'>
+				{!this.state.loggedIn
+						? <Entry onLoginSuccess={res => this.setState({ loggedIn: true })} />
+						: <Course />
+				}
+			</div>
+    );
+  }
 }
 
 export default App;
