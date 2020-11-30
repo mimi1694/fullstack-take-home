@@ -10,10 +10,8 @@ export const fetchUser = (id) =>
 
 export const createUser = (name, email) => 
     axios.post(`api/users`, { name, email })
-        .catch(err => {
-            
-        });
+        .catch(console.error);
 
-export const updateUser = (name, email, sectionIds) =>
-    axios.put(`api/users`, { name, email, sectionIds })
+export const updateUser = (userId, sectionIds) =>
+    axios.put(`api/users`, { userId, sectionIds })
         .catch(console.error);
