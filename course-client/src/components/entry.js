@@ -24,7 +24,6 @@ export class Entry extends React.Component {
 		if (this.state.name.length && this.state.email.length) {
 			createUser(this.state.name, this.state.email)
         .then(res => {
-          console.warn(res);
           this.props.onLoginSuccess(res);
         });
 		} else {

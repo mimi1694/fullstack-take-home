@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  width: 70%;
+  margin: 0 auto;
 }
 
 .App-logo {
@@ -35,4 +37,27 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.course {
+  background: white;
+  padding: 16px;
+  border-radius: 16px;
+  margin-bottom: 48px;
+  text-align: left;
+}
+
+.course-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.enrolled-label {
+  background: rgb(157, 214, 72);
+  color: white;
+  border-radius: 8px;
+  font-weight: bold;
+  padding: 8px;
+  margin: 0 8px;
 }
