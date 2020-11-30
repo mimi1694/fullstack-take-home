@@ -6,14 +6,16 @@ const port = 8081;
 const app = express();
 const db = require('./db');
 
-const test = true;
+const test = false;
 
 const setUpApp = () => {
 	app.use(cors());
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: true }));
 	app.use('/api', require('./routes'));
+}
 
+const startApp = () => {
 	app.get('/', (req, res) => {
 		res.status(200).send('Hello World!!');
 	});
@@ -23,13 +25,7 @@ const setUpApp = () => {
 	});
 }
 
-
-const setUpDB = () => {
-	// if (test) { }
-};
-
-db.sync({ force: test }).then(() => {
-	test && console.log('Dropped and re-sync db.');
-	setUpApp();
-	setUpDB();
-}).catch(console.error);
+db.sync({ force: test })
+	.then(setUpApp)
+	.then(startApp)
+	.catch(console.error);

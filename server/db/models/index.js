@@ -4,20 +4,13 @@ const Section = require('./section');
 const Session = require('./session');
 
 User.hasMany(Section);
-User.belongsToMany(Section, { through: 'SignUp' });
+Section.belongsToMany(User, { through: 'SignUps' });
 
 Course.hasMany(Section);
-Course.belongsTo(Section, {
-  foreignKey: 'courseSectionId',
-  constraints: false
-});
+Section.belongsTo(Course);
 
 Course.hasMany(Session);
-Course.belongsTo(Session, {
-  through: 'CourseSession',
-  foreignKey: 'courseSessionId',
-  constraints: false
-});
+Session.belongsTo(Course);
 
 module.exports = {
   User,
