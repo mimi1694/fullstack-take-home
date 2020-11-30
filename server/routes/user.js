@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const { User, Section } = require("../db/models");
+const { Op } = require("sequelize");
+
 module.exports = router;
 
 router.get("/:userId", (req, res, next) => {
@@ -23,7 +25,10 @@ router.get("/", (req, res, next) => {
 router.post("/", (req, res, next) => {
 	User.findOrCreate({
     where: {
-      email: req.body.email
+      [Op.and]: [
+        {email: req.body.email},
+        {name: req.body.name}
+      ]
     },
     defaults: {
       email: req.body.email,
@@ -31,20 +36,12 @@ router.post("/", (req, res, next) => {
     }
 	})
   .then(([user, wasCreated]) => {
-    if (wasCreated) {
-      return res.json(user);
-    }
-    else {
-      let err = new Error("An account already exists for that email address");
-      err.status = 409;
-      next(err);
-    }
+    return res.json(user);
   })
-  .catch(next);
+  .catch(err => { console.error(err); throw err; });
 });
 
 router.put("/", (req, res, next) => {
-  console.warn(req.body);
   User.update(
     {
       email: req.body.email,

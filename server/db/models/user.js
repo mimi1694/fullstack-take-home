@@ -6,7 +6,9 @@ const User = db.define('user', {
     type: DataTypes.STRING
   },
   email: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true
   }
 });
 
