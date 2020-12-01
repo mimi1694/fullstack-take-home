@@ -43,7 +43,8 @@ export class Course extends React.Component {
           <Session key={i}
                    userSignedUp={this.state.userSignedUp}
                    userId={this.props.userId}
-                   session={session} />)}
+                   session={session}
+                   userSection={this.state.userSectionId} />)}
         <h4>Past and Current Sections</h4>
         {this.state.sections.map((section, i) =>
           <Section key={i}
