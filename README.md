@@ -53,3 +53,50 @@ yarn && yarn start
 - A list of users signed up for each course section should be visible.
 
 - A user should be able to register for a course and remove themselves from the course.
+
+-------------------------------------------------------------------
+
+## Mimi's notes - Running the app
+
+- if you don't have postgres installed on your machine, install and set up based on the instructions here: https://www.postgresql.org/download/
+
+- if you don't have yarn installed on your machine, do so using the instructions found here: https://classic.yarnpkg.com/en/docs/install/#mac-stable
+
+Now you're ready to start the app!
+
+- fork and clone the repo from https://github.com/mimi1694/fullstack-take-home
+
+```
+cd fullstack-take-home
+```
+- creat the database using either run createdb course-db, or through the pgAdmin app
+
+- from the root folder of the app run
+```
+yarn fullDevStart
+```
+- This will take care of dependency installation, so now the app should be up and running!
+
+## Mimi's notes on development:
+
+- Backend:
+The backend mainly consists of the database model and the routes which handle GET/PUT/POST/DELETE requests.
+Each model gets its own file and is exported through db/models/index.js. That file also creates the associations between the models.
+Each route is served from localhost:{PORT}/api/{model-name}, and each route can get the information for a specific item through localhost:{PORT}/api/{model-name}/:modelId.
+
+- Frontend:
+Similarly, the frontend is organize by components and the api.
+The api folder has a file for each model, and a list of exported axios calls to that model's corresponding routes.
+Generally, due to the nature of how the information is presented, there is a component for each model as well.
+
+- Choices made/challenges while coding:
+
+- One interesting choice I made was regarding limiting section sign ups to 10 users.
+I wanted the front end to both recieve the error, be able to handle it gracefully, but
+also not even allow the user to get into an error state. In order to achieve this, I checked
+for a certain amount of users in each course before attempting to add one. If the course is full,
+send back a 400 status with an error message.  Then on the front end, prevent the user from even
+pressing the "enroll" button if the course is full, but if somehow they do anyway, catch that error in 
+the promise and log it.
+
+Regarding the app set up, since I am not well versed with Docker for the sake of time I utilized a local postgres database & server.

@@ -3,7 +3,8 @@ const db = require('../db');
 
 const Course = db.define('course', {
   name: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    allowNull: false
   },
   description: {
     type: DataTypes.STRING

@@ -4,12 +4,12 @@
   "description": "full stack course selector with node, express, sequelize, posgres, and react",
   "scripts": {
     "installAll": "cd server && yarn && cd ../course-client && yarn && cd ../",
-    "seed": "cd server && npm run seed && cd ../",
-    "server": "cd server && yarn && yarn start && cd ../",
-    "client": "cd course-client && yarn && yarn start && cd ../",
-    "build:client": "cd course-client && npm run build && cd ../",
-    "startApp": "npm run seed && npm run server & npm run client"
+    "seed": "cd server && yarn seed && cd ../",
+    "server": "cd server && yarn start && cd ../",
+    "client": "cd course-client && yarn start && cd ../",
+    "startApp": "yarn seed && yarn server & yarn client",
+    "fullDevStart": "yarn installAll && yarn startApp"
   },
-  "author": "",
+  "author": "mimi",
   "license": "ISC"
 }

@@ -3,10 +3,12 @@ const db = require('../db');
 
 const Section = db.define('section', {
   nickname: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    allowNull: false
   },
   dateStart: {
-    type: DataTypes.DATE
+    type: DataTypes.DATE,
+    allowNull: false
   }
 });
 

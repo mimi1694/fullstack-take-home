@@ -5,7 +5,7 @@ module.exports = router;
 router.param('sessionId', (req, res, next, sessionId) => {
   Session.findOne({
     where: {id: sessionId},
-    attributes: ["id", "sessionNumber", "name", "released", "description"],
+    attributes: ["id", "sessionNumber", "name", "description"],
 		include: [{model: Course}]
   })
   .then(session => {
@@ -16,7 +16,7 @@ router.param('sessionId', (req, res, next, sessionId) => {
 
 router.get("/", (req, res, next) => {
   Session.findAll({
-    attributes: ["id", "sessionNumber", "name", "released", "description"],
+    attributes: ["id", "sessionNumber", "name", "description"],
 		include: [{model: Course}]
   })
   .then(sessions => res.json(sessions))
@@ -32,7 +32,6 @@ router.post("/", (req, res, next) => {
 		where: {
       name: req.body.name,
       sessionNumber: req.body.sessionNumber,
-      released: req.body.released,
       description: req.body.description,
       
     }
